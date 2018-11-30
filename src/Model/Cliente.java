@@ -6,27 +6,20 @@ public class Cliente {
 
 	private Integer idCliente;
 	private String nomeCliente;
-	private Integer telefone;
+	private String telefone;
 	private List<Endereco> listaEnderecos;
 	private List<Pedido> listaPedidos;
 	
-	
 	// construtor
-	
-
-	public Cliente(Integer idCliente, String nomeCliente, Integer telefone) {
-		this.idCliente = idCliente;
+	public Cliente(String nomeCliente, String telefone) {
 		this.nomeCliente = nomeCliente;
 		this.telefone = telefone;
+	}
+	public Cliente() {
 		
 	}
-	
-	// metodo
-	
-	
 
 	// encapsulamento
-	
 	public List<Pedido> getListaPedidos() {
 		return listaPedidos;
 	}
@@ -59,21 +52,11 @@ public class Cliente {
 		this.nomeCliente = nomeCliente;
 	}
 
-	public Integer getTelefone() {
+	public String getTelefone() {
 		return telefone;
 	}
 
-	public void setTelefone(Integer telefone) {
+	public void setTelefone(String telefone) {
 		this.telefone = telefone;
 	}
-
-	public Integer getTelefoneUsuario() {
-		return telefone;
-	}
-
-
-	public void setTelefoneUsuario(Integer telefoneUsuario) {
-		this.telefone = telefoneUsuario;
-	}
-	
 }

@@ -13,6 +13,7 @@ public class TesteItem {
 		
 		TipoItem paoFrances = new TipoItem();
 		TipoItem carneBoi = new TipoItem();
+		TipoItem queijoPrato = new TipoItem();
 			
 		paoFrances.setValorTipoItem(1.00);
 		paoFrances.setIdTipoItem(1);
@@ -21,12 +22,17 @@ public class TesteItem {
 		carneBoi.setValorTipoItem(10.0);
 		carneBoi.setIdTipoItem(1);
 		carneBoi.setNomeTipoItem("CARNE");
+		
+		queijoPrato.setIdTipoItem(1);
+		queijoPrato.setNomeTipoItem("QUEIJO PRATO");
+		queijoPrato.setValorTipoItem(0.75);
 			
 		
 		// Instanciando a classe dos itens (pão frances como tipo de pão)
 		
 		Item pao = new Item(1, paoFrances);
 		Item carne = new Item(1, carneBoi);
+		Item queijo = new Item(1, queijoPrato);
 		
 		//Criação da lista de itens para compor o produto final
 		// itensHamburguer é uma lista de itens
@@ -37,6 +43,7 @@ public class TesteItem {
 		
 		itensHamburguer.add(carne);
 		itensHamburguer.add(pao);
+		itensHamburguer.add(queijo);
 		
 		
 		// instanciando Produto como resultado dos itens juntos
@@ -50,7 +57,20 @@ public class TesteItem {
 		
 		System.out.println(hamburguer.getItensEscolhidos().get(0).getTipoItem().getNomeTipoItem());
 		System.out.println(hamburguer.getItensEscolhidos().get(0).getTipoItem().getValorTipoItem());
+	
+
+		// for para imprimir os itens e seus valores da lista produto 
 		
+		for( Item x: hamburguer.getItensEscolhidos()) {
+			System.out.println( x.getTipoItem().getNomeTipoItem());
+			System.out.println( x.getTipoItem().getValorTipoItem());
+
+		}
+		
+		// método para calcular o valor dos itens na lista
+	
+		hamburguer.calculaValor();
+		System.out.println(hamburguer.getValor());
 	
 	}
 }
