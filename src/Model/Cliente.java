@@ -7,7 +7,7 @@ public class Cliente {
 	private Integer idCliente;
 	private String nomeCliente;
 	private String telefone;
-	private List<Endereco> listaEnderecos;
+	private String endereco;
 	private List<Pedido> listaPedidos;
 	
 	// construtor
@@ -19,6 +19,7 @@ public class Cliente {
 		
 	}
 
+
 	// encapsulamento
 	public List<Pedido> getListaPedidos() {
 		return listaPedidos;
@@ -27,13 +28,11 @@ public class Cliente {
 	public void setListaPedidos(List<Pedido> listaPedidos) {
 		this.listaPedidos = listaPedidos;
 	}
-
-	public List<Endereco> getListaEnderecos() {
-		return listaEnderecos;
+	public String getEndereco() {
+		return endereco;
 	}
-
-	public void setListaEnderecos(List<Endereco> listaEnderecos) {
-		this.listaEnderecos = listaEnderecos;
+	public void setEndereco(String endereco) {
+		this.endereco = endereco;
 	}
 
 	public Integer getIdCliente() {

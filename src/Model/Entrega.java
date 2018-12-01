@@ -4,15 +4,13 @@ public class Entrega {
 
 	Integer idEntrega;
 	double taxa = 10.00;
-	Endereco endereco;
 	Pedido pedido;
 	
 
 	//construtor
 	
-	public Entrega(Integer idEntrega, double taxa, Endereco endereco) {
+	public Entrega(Integer idEntrega, double taxa) {
 		
-		this.endereco = endereco;
 		this.idEntrega = idEntrega;
 		this.taxa = taxa;
 	}
@@ -45,14 +43,6 @@ public class Entrega {
 
 	public void setTaxa(double taxa) {
 		this.taxa = taxa;
-	}
-
-	public Endereco getEndereco() {
-		return endereco;
-	}
-
-	public void setEnderecoEntrega(Endereco endereco) {
-		this.endereco = endereco;
 	}
 	
 }
