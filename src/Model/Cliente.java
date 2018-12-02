@@ -6,6 +6,7 @@ public class Cliente {
 
 	private Integer idCliente;
 	private String nomeCliente;
+	private String senha;
 	private String telefone;
 	private String endereco;
 	private List<Pedido> listaPedidos;
@@ -18,8 +19,7 @@ public class Cliente {
 	public Cliente() {
 		
 	}
-
-
+	
 	// encapsulamento
 	public List<Pedido> getListaPedidos() {
 		return listaPedidos;
@@ -28,6 +28,15 @@ public class Cliente {
 	public void setListaPedidos(List<Pedido> listaPedidos) {
 		this.listaPedidos = listaPedidos;
 	}
+	
+	public String getSenha() {
+		return senha;
+	}
+	
+	public void setSenha(String senha) {
+		this.senha = senha;
+	}
+	
 	public String getEndereco() {
 		return endereco;
 	}

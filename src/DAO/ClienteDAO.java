@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import Conexão.Conexao;
 import Model.Cliente;
 
 public class ClienteDAO {
@@ -15,14 +16,14 @@ public class ClienteDAO {
 	private Connection c;
 	private Conexao conexao = null;
 
-	// construotor para instanciar conexão
+	// construtor para instanciar conexão
 	public ClienteDAO() {
 		conexao = new Conexao();
 	}
 	
 	// metodo para adiconar dados na tabela cliente
 	public void inserirCliente(Cliente cliente) throws Exception{
-		sql = "INSERT INTO CLIENTE (nome_Cliente, telefone) VALUES (?,?);";
+		sql = "INSERT INTO CLIENTE (NOME_CLIENTE, TELEFONE, ENDERECO, SENHA) VALUES (?,?,?,?);";
 		c = conexao.conectaBanco();
 		if(c == null) {
 			System.out.println("Erro ao conectar (DAO)");
@@ -33,6 +34,8 @@ public class ClienteDAO {
 		ps = c.prepareStatement(sql);
 		ps.setString(1, cliente.getNomeCliente());
 		ps.setString(2, cliente.getTelefone());
+		ps.setString(3, cliente.getEndereco());
+		ps.setString(4, cliente.getSenha());
 		ps.executeUpdate();
 		
 		conexao.desconectaBanco();
@@ -57,7 +60,7 @@ public class ClienteDAO {
 	
 	// metodo para atualizar linha da tabela
 	public void atualizarCliente(Cliente cliente) throws Exception{
-		sql = "UPDATE CLIENTE SET nome_Cliente = ?, telefone = ? WHERE ID_CLIENTE = ?;";
+		sql = "UPDATE CLIENTE SET NOME_CLIENTE = ?, TELEFONE = ?, ENDERECO = ?, SENHA = ? WHERE ID_CLIENTE = ?;";
 		c = conexao.conectaBanco();
 		if(c == null) {
 			System.out.println("Erro ao conectar (DAO)");
@@ -68,16 +71,17 @@ public class ClienteDAO {
 		ps = c.prepareStatement(sql);
 		ps.setString(1, cliente.getNomeCliente());
 		ps.setString(2, cliente.getTelefone());
-		ps.setInt(3, cliente.getIdCliente());
+		ps.setString(3, cliente.getEndereco());
+		ps.setString(4, cliente.getSenha());
+		ps.setInt(5, cliente.getIdCliente());
 		ps.executeUpdate();
 		
 		conexao.desconectaBanco();
 	}
 	
 	// metodo para consultar dados da tabela
-	//incompleto
 	public Cliente consultarCliente(Cliente cliente) throws Exception{
-		sql = "SELECT ID_CLIENTE, NOME_CLIENTE, TELEFONE FROM CLIENTE WHERE ID_CLIENTE = ?;";
+		sql = "SELECT ID_CLIENTE, NOME_CLIENTE, TELEFONE, ENDERECO, SENHA FROM CLIENTE WHERE ID_CLIENTE = ?;";
 		c = conexao.conectaBanco();
 		if(c == null) {
 			System.out.println("Erro ao conectar (DAO)");
@@ -85,29 +89,27 @@ public class ClienteDAO {
 			System.out.println("Conectado com sucesso");
 		}
 		ps = c.prepareStatement(sql);
-		ps.setString(1, cliente.getNomeCliente());
+		ps.setInt(1, cliente.getIdCliente());
 		rs = ps.executeQuery(sql);
 		
 		Cliente c = null;
 		
         while (rs.next()) {
-        	int id = rs.getInt("id_Cliente");
-        	String nome = rs.getString("nome_Cliente");
-        	String telefone = rs.getString("telefone");
         	
         	c = new Cliente();
-        	c.setIdCliente(id);
-        	c.setTelefone(telefone);
-        	c.setNomeCliente(nome);
+        	c.setIdCliente(rs.getInt("ID_CLIENTE"));
+        	c.setTelefone(rs.getString("TELEFONE"));
+        	c.setEndereco(rs.getString("ENDERECO"));
+        	c.setSenha(rs.getString("SENHA"));
+        	c.setNomeCliente(rs.getString("NOME_CLIENTE"));
         }
-				
 		conexao.desconectaBanco();
-		
 		return c;
 	}
 
+	// Método para listar todos os cliente da tabela
 	public List<Cliente> listarTodos() throws Exception {
-		sql = "SELECT ID_CLIENTE, NOME_CLIENTE, TELEFONE FROM CLIENTE";
+		sql = "SELECT ID_CLIENTE, NOME_CLIENTE, TELEFONE, ENDERECO, SENHA FROM CLIENTE";
 		c = conexao.conectaBanco();
 		if(c == null) {
 			System.out.println("Erro ao conectar (DAO)");
@@ -121,21 +123,22 @@ public class ClienteDAO {
 		List<Cliente> clientes = new ArrayList<Cliente>();
 		
         while (rs.next()) {
-        	int id = rs.getInt("id_Cliente");
-        	String nome = rs.getString("nome_Cliente");
-        	String telefone = rs.getString("telefone");
+        	int id = rs.getInt("ID_CLIENTE");
+        	String nome = rs.getString("NOME_CLIENTE");
+        	String telefone = rs.getString("TELEFONE");
+        	String endereco = rs.getString("ENDERECO");
+        	String senha = rs.getString("SENHA");
         	
         	Cliente c = new Cliente();
         	c.setIdCliente(id);
         	c.setTelefone(telefone);
         	c.setNomeCliente(nome);
+        	c.setEndereco(endereco);
+        	c.setSenha(senha);
         	
         	clientes.add(c);
         }
-        
         conexao.desconectaBanco();
-        
-        return clientes;
-        
+        return clientes; 
 	}
 }

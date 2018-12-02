@@ -29,13 +29,14 @@ public class Produto {
 		}
 	}
 	
-	// encapsulamento
-	// valor não possui set. para evitar que alterem o valor dos produtos.
-	
+	// encapsulamento	
 	public double getValor() {
 		return valor;
 	}
 	
+	public void setValor(double valor) {
+		this.valor = valor;
+	}
 
 	public Integer getIdProduto() {
 		return idProduto;
@@ -60,6 +61,4 @@ public class Produto {
 	public void setItensEscolhidos (List<Item> itensEscolhidos) {
 		this.itensEscolhidos = itensEscolhidos;
 	}
-
-	
 }
