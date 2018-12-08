@@ -17,8 +17,8 @@ public class ClienteService {
 		return dao.listarTodos();
 	}
 	
-	public void Consultar(Cliente cliente) throws Exception {
-		 dao.consultarCliente(cliente);
+	public Cliente consultar(Cliente cliente) throws Exception {
+		 return dao.consultarCliente(cliente);
 	}
 	
 	public void deletar(Cliente cliente) throws Exception {
@@ -27,5 +27,19 @@ public class ClienteService {
 	
 	public void atualizar(Cliente cliente) throws Exception {
 		dao.atualizarCliente(cliente);
+	}
+	
+	public Cliente login(Cliente cliente)  throws Exception{
+		
+		Cliente consulta = 	dao.login(cliente);
+		
+		if (consulta == null) {
+			throw new Exception("Nome de usuário inválido!");
+		}
+		if(!cliente.getSenha().equals(consulta.getSenha())) {
+			consulta = null;
+			throw new Exception("Senha incorreta!");
+		}
+		return consulta;
 	}
 }

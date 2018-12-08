@@ -58,6 +58,7 @@ public class PedidoDAO {
 		conexao.desconectaBanco();
 	}
 	
+	
 	// metodo para atualizar linha da tabela
 	public void atualizarPedido(Pedido pedido) throws Exception{
 		sql = "UPDATE PEDIDO SET VALOR_TOTAL = ?, ID_CLIENTE_FK = ?, PAGAMENTO = ? WHERE ID_PEDIDO = ?;";
@@ -77,6 +78,7 @@ public class PedidoDAO {
 		
 		conexao.desconectaBanco();
 	}
+	
 	
 	// metodo para consultar dados da tabela
 	public Pedido consultarPedido(Pedido pedido) throws Exception{
@@ -108,7 +110,7 @@ public class PedidoDAO {
 	}
 
 	// Método para listar todos os item da tabela
-	public List<Pedido> ListarPedidos (Pedido pedido) throws Exception {
+	public List<Pedido> ListarPedidos () throws Exception {
 		sql = "SELECT ID_PEDIDO, VALOR_TOTAL, ID_CLIENTE_FK, PAGAMENTO FROM PEDIDO";
 		c = conexao.conectaBanco();
 		if(c == null) {
